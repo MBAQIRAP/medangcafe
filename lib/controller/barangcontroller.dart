@@ -70,19 +70,25 @@ class Getbarang extends GetxController {
     if (cari.isEmpty || !cari.contains(RegExp(r'[a-zA-Z]'))) {
       temu = List.from(barang);
     } else {
+      List<String> searchWords = cari.toLowerCase().split(' ');
       temu = barang
-          .where(
-            (element) =>
-            element['data']['nama']
-                .toString()
-                .toLowerCase()
-                .startsWith(cari.toLowerCase()),).toList();
-      if(temu.isEmpty) {
-        temu = [{
-          'message' : 'kosong',
-        }];
+          .where((element) =>
+          searchWords.any((word) =>
+              element['data']['nama']
+                  .toString()
+                  .toLowerCase()
+                  .contains(word)))
+          .toList();
+      if (temu.isEmpty) {
+        temu = [
+          {
+            'message': 'kosong',
+          }
+        ];
       }
     }
+
+    // Notify listeners that the state has been updated.
     update();
   }
 
