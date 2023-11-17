@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "122948700389",
+    "project_id": "medangcaffe",
+    "storage_bucket": "medangcaffe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:122948700389:android:bd8080e59817ea50f46c0c",
+        "android_client_info": {
+          "package_name": "com.medang_caffe.medang_caffe"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMy3HdQHfIvA5GIFLiuhACEN1ZPZjJJcQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
