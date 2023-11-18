@@ -39,6 +39,12 @@ class _BarangState extends State<Barang> {
     );*/
   }
 
+  void dispose() {
+    // Cancel the subscription to avoid memory leaks
+    keyboardSubscription.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,6 +100,7 @@ class _BarangState extends State<Barang> {
         ),
         floatingActionButton: !flo
             ? FloatingActionButton(
+                heroTag: null,
                 backgroundColor: Colors.black,
                 foregroundColor: Colors.white,
                 onPressed: () {

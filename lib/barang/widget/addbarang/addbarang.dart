@@ -100,6 +100,7 @@ class _AddBaranGState extends State<AddBaranG> {
                     harga.text.length <= 0 ||
                     jumlah.text.length <= 0
                 ? FloatingActionButton(
+                    heroTag: null,
                     backgroundColor: Colors.grey.shade300,
                     foregroundColor: Colors.white,
                     onPressed: () {},
@@ -109,6 +110,7 @@ class _AddBaranGState extends State<AddBaranG> {
                     ),
                   )
                 : FloatingActionButton(
+                    heroTag: null,
                     backgroundColor: Colors.black,
                     foregroundColor: Colors.white,
                     onPressed: () {

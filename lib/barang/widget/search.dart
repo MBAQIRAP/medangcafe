@@ -19,11 +19,13 @@ class _SearchState extends State<Search> {
   late String barcode;
   _scan() async {
     barcode = (await scanner.scan())!;
-    setState(() {
-      barang.text = barcode;
-      b.cari(cari: barcode);
-    });
-
+    // Check if the widget is still mounted before updating the state.
+    if (mounted) {
+      setState(() {
+        barang.text = barcode;
+        b.cari(cari: barcode);
+      });
+    }
     print(barcode);
   }
 
@@ -60,20 +62,6 @@ class _SearchState extends State<Search> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.black,
-        foregroundColor: Colors.white,
-        onPressed: () {
-          Get.bottomSheet(
-            AddBaranG(),
-            isScrollControlled: true,
-          );
-        },
-        child: Icon(
-          Icons.store_mall_directory_outlined,
-          color: Colors.white,
-        ),
-      ),
     body: WillPopScope(
       onWillPop: () async {
         if (mounted) {
@@ -108,15 +96,12 @@ class _SearchState extends State<Search> {
                         return Column(
                           children: [
                             for (var a in val.barang)
-                              ListSearch(
+                              Expa(
                                 kode: a['data']['bar'],
                                 id: a['id'],
                                 nama: a['data']['nama'],
                                 harga: a['data']['harga'],
                                 stock: a['data']['jumlah'],
-                                x: false,
-                                i: 0,
-                                jumbel: null,
                               ),
                           ],
                         );
@@ -130,15 +115,12 @@ class _SearchState extends State<Search> {
                         return Column(
                           children: [
                             for (var a in val.temu)
-                              ListSearch(
+                              Expa(
                                 kode: a['data']['bar'],
                                 id: a['id'],
                                 nama: a['data']['nama'],
                                 harga: a['data']['harga'],
                                 stock: a['data']['jumlah'],
-                                x: false,
-                                i: 0,
-                                jumbel: null,
                               ),
                           ],
                         );

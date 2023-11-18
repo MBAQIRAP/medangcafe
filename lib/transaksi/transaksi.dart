@@ -134,6 +134,7 @@ class _TransaksiState extends State<Transaksi> {
           ),
           ),
           FloatingActionButton(
+            heroTag: null,
             backgroundColor: Colors.black,
             onPressed: () {
               Get.to(

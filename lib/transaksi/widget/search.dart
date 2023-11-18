@@ -17,11 +17,13 @@ class _SearchState extends State<Search> {
   late String barcode;
   _scan() async {
     barcode = (await scanner.scan())!;
-    setState(() {
-      barang.text = barcode;
-      b.cari(cari: barcode);
-    });
-
+    // Check if the widget is still mounted before updating the state.
+    if (mounted) {
+      setState(() {
+        barang.text = barcode;
+        b.cari(cari: barcode);
+      });
+    }
     print(barcode);
   }
 
