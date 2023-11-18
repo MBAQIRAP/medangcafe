@@ -104,11 +104,27 @@ class _SearchState extends State<Search> {
                   GetBuilder<Getbarang>(
                     init: Getbarang(),
                     builder: (val) {
-                      if(val.temu.length == 1){
+                      if(val.temu.isEmpty){
+                        return Column(
+                          children: [
+                            for (var a in val.barang)
+                              ListSearch(
+                                kode: a['data']['bar'],
+                                id: a['id'],
+                                nama: a['data']['nama'],
+                                harga: a['data']['harga'],
+                                stock: a['data']['jumlah'],
+                                x: false,
+                                i: 0,
+                                jumbel: null,
+                              ),
+                          ],
+                        );
+                      }else if(val.temu.first['message'] != null){
                         return Center(
-                            child: Container(
-                              child: Text("Makanan & Minuman yang dicari kosong "),
-                            )
+                          child: Container(
+                            child: Text('Kosong'),
+                          ),
                         );
                       }else{
                         return Column(

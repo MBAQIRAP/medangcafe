@@ -5,8 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class Getbarang extends GetxController {
-  CollectionReference dbbarang =
-      FirebaseFirestore.instance.collection('barang');
+  CollectionReference dbbarang = FirebaseFirestore.instance.collection('barang');
   List barang = [];
   List temu = [];
   List beli = [];
@@ -67,28 +66,29 @@ class Getbarang extends GetxController {
   }
 
   void cari({required String cari}) async {
-    if (cari.isEmpty || !cari.contains(RegExp(r'[a-zA-Z]'))) {
-      temu = List.from(barang);
+    String lowerCaseQuery = cari.trim().toLowerCase();
+    var filteredList = barang
+        .where((element) =>
+        element['data']['nama']
+            .toString()
+            .toLowerCase()
+            .startsWith(lowerCaseQuery))
+        .toList();
+
+    // Check if the filtered list is empty
+    if (filteredList.isEmpty) {
+      // If empty, set a message in temu
+      temu = [
+        {
+          'message': 'No results found', // Your message for no results
+        }
+      ];
     } else {
-      List<String> searchWords = cari.toLowerCase().split(' ');
-      temu = barang
-          .where((element) =>
-          searchWords.any((word) =>
-              element['data']['nama']
-                  .toString()
-                  .toLowerCase()
-                  .contains(word)))
-          .toList();
-      if (temu.isEmpty) {
-        temu = [
-          {
-            'message': 'kosong',
-          }
-        ];
-      }
+      // If not empty, set temu to the filtered list
+      temu = filteredList;
     }
 
-    // Notify listeners that the state has been updated.
+    // Trigger a rebuild of the widget tree to reflect the updated state
     update();
   }
 
