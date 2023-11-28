@@ -11,7 +11,7 @@ class ContentHis extends StatefulWidget {
 }
 
 class _ContentHisState extends State<ContentHis> {
-  final tg = new DateFormat('EEEE, MMMM yyyy & HH:mm', 'id_ID');
+  final tg = DateFormat('EEEE, MMMM yyyy & HH:mm', 'id_ID');
   bool x = false;
   @override
   Widget build(BuildContext context) {

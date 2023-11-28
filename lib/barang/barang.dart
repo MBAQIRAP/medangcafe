@@ -56,7 +56,7 @@ class _BarangState extends State<Barang> {
           backgroundColor: Colors.white,
           foregroundColor: Colors.black,
           title: Text(
-            "Barang",
+            "Menu",
             style: TextStyle(
               color: Colors.black,
             ),

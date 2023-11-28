@@ -65,6 +65,10 @@ class _WrapState extends State<Wrap> {
   void initState() {
     b.getbarang();
     t.gettransaksi();
+    b.getmakanan();
+    b.getminuman();
+    t.gettransmakanan();
+    t.getchart();
     super.initState();
   }
 
@@ -104,9 +108,9 @@ class _WrapState extends State<Wrap> {
               label: "Transaksi"),
           BottomNavigationBarItem(
               icon: Icon(
-                Icons.store_mall_directory_outlined,
+                Icons.restaurant_menu,
               ),
-              label: "Barang"),
+              label: "Menu"),
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.paste_rounded,

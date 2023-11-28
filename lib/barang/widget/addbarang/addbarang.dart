@@ -15,6 +15,7 @@ class _AddBaranGState extends State<AddBaranG> {
   TextEditingController nama = TextEditingController();
   TextEditingController harga = TextEditingController();
   TextEditingController jumlah = TextEditingController();
+  String? kategori;
   late String barcode;
   Getbarang b = Get.put(Getbarang());
 
@@ -95,10 +96,42 @@ class _AddBaranGState extends State<AddBaranG> {
               height: 10,
             ),
             sc(hint: "Jumlah", c: jumlah, tp: TextInputType.number),
+            Container(
+              child: Row(
+                children: [
+                  Expanded(
+                      child: RadioListTile(
+                          title: Text("Makanan"),
+                          value: "makanan",
+                          groupValue: kategori,
+                          onChanged: (value){
+                            setState(() {
+                              kategori = value! as String;
+                              print(kategori);
+                            });
+                          }
+                      ),
+                  ),
+                  Expanded(
+                    child: RadioListTile(
+                        title: Text("Minuman"),
+                        value: "minuman",
+                        groupValue: kategori,
+                        onChanged: (value){
+                          setState(() {
+                            kategori = value! as String;
+                          });
+                        }
+                    ),
+                  ),
+                ],
+              ),
+            ),
             Spacer(),
             nama.text.length <= 0 ||
                     harga.text.length <= 0 ||
-                    jumlah.text.length <= 0
+                    jumlah.text.length <= 0 ||
+                    kategori == null
                 ? FloatingActionButton(
                     heroTag: null,
                     backgroundColor: Colors.grey.shade300,
@@ -117,6 +150,7 @@ class _AddBaranGState extends State<AddBaranG> {
                       b.addbarang(
                         bar: kodebar.text,
                         nama: nama.text,
+                        kategori: kategori!,
                         harga: int.parse(harga.text),
                         jumlah: int.parse(jumlah.text),
                       );

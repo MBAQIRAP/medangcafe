@@ -27,7 +27,7 @@ class _TransaksiState extends State<Transaksi> {
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         title: Text(
-          "Cashier mobile",
+          "Medang Cafe",
           style: TextStyle(
             color: Colors.black,
           ),

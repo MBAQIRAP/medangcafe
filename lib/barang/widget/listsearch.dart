@@ -14,6 +14,7 @@ class ListSearch extends StatefulWidget {
   final bool? x;
   final int? i;
   final int? jumbel;
+  final String? kategori;
   ListSearch(
       {this.id,
       this.kode,
@@ -22,7 +23,8 @@ class ListSearch extends StatefulWidget {
       this.stock,
       this.x,
       this.i,
-      this.jumbel});
+      this.jumbel,
+      this.kategori});
   @override
   _ListSearchState createState() => _ListSearchState();
 }
@@ -61,6 +63,7 @@ class _ListSearchState extends State<ListSearch> {
                     id: widget.id!,
                     kode: widget.kode!,
                     nama: widget.nama!,
+                    kategori: widget.kategori!,
                     harga: widget.harga!,
                     jumlah: widget.stock!,
                     jumlahbeli: int.parse(jumbel.text),

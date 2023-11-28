@@ -13,7 +13,8 @@ class Expa extends StatefulWidget {
   final String? nama;
   final int? harga;
   final int? stock;
-  Expa({this.id, this.kode, this.nama, this.harga, this.stock});
+  String? kategori;
+  Expa({this.id, this.kode, this.nama, this.harga, this.stock, this.kategori});
   @override
   _ExpaState createState() => _ExpaState();
 }
@@ -23,11 +24,13 @@ class _ExpaState extends State<Expa> {
   TextEditingController nama = TextEditingController();
   TextEditingController harga = TextEditingController();
   TextEditingController stock = TextEditingController();
+  String? kategori;
   bool ex = false;
   Getbarang b = Get.put(Getbarang());
   @override
   void initState() {
     super.initState();
+    kategori = widget.kategori;
   }
 
   @override
@@ -79,7 +82,7 @@ class _ExpaState extends State<Expa> {
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(100),
-              child: Icon(Icons.folder_open, color: Colors.black),
+              child: Icon(Icons.restaurant_menu, color: Colors.black),
             ),
           ),
           title: Row(
@@ -298,6 +301,38 @@ class _ExpaState extends State<Expa> {
                 ),
               ),
             ]),
+        Container(
+          child: Row(
+            children: [
+              Expanded(
+                child: RadioListTile(
+                    title: Text("Makanan"),
+                    value: "makanan",
+                    groupValue: kategori,
+                    onChanged: (value){
+                      setState(() {
+                        kategori = value as String;
+                        print(kategori);
+                      });
+                    }
+                ),
+              ),
+              Expanded(
+                child: RadioListTile(
+                    title: Text("Minuman"),
+                    value: "minuman",
+                    groupValue: kategori,
+                    onChanged: (value){
+                      setState(() {
+                        kategori = value as String;
+                        print(kategori);
+                      });
+                    }
+                ),
+              ),
+            ],
+          ),
+        ),
             SizedBox(
               height: 15,
             ),
@@ -308,6 +343,7 @@ class _ExpaState extends State<Expa> {
                   b.editbarang(
                     id: widget.id!,
                     nama: nama.text,
+                    kategori: kategori!,
                     harga: int.parse(harga.text),
                     stock: int.parse(stock.text),
                   );
@@ -320,9 +356,10 @@ class _ExpaState extends State<Expa> {
                     color: nama.text.length <= 0 ||
                             harga.text.length <= 0 ||
                             stock.text.length <= 0 ||
-                            nama.text == widget.nama &&
+                                nama.text == widget.nama &&
                                 harga.text == widget.harga.toString() &&
-                                stock.text == widget.stock.toString()
+                                stock.text == widget.stock.toString() &&
+                                kategori == widget.kategori.toString()
                         ? Colors.grey.shade200
                         : Colors.black,
                     borderRadius: BorderRadius.circular(10),
@@ -333,7 +370,8 @@ class _ExpaState extends State<Expa> {
                     style: TextStyle(
                       color: nama.text.length <= 0 ||
                               harga.text.length <= 0 ||
-                              stock.text.length <= 0
+                              stock.text.length <= 0 ||
+                              kategori == null
                           ? Colors.grey
                           : Colors.white,
                       fontSize: 13,
@@ -358,12 +396,16 @@ class _ExpaState extends State<Expa> {
                 stock.text.length <= 0
                     ? stock.text = widget.stock.toString()
                     : stock.text = stock.text;
+                kategori == null
+                    ? kategori = widget.kategori.toString()
+                    : kategori = kategori;
               }
               if (value == true) {
                 kode.text = widget.kode!;
                 nama.text = widget.nama!;
                 harga.text = widget.harga.toString();
                 stock.text = widget.stock.toString();
+                kategori = widget.kategori.toString();
               }
               ex = value;
             });

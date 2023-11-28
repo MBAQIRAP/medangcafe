@@ -28,14 +28,14 @@ class _TotalUpState extends State<TotalUp> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Jenis barang",
+                    "Daftar Makanan",
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.black54,
                     ),
                   ),
                   Text(
-                    val.barang.length.toString(),
+                    val.makanan.length.toString(),
                     style: TextStyle(
                       fontSize: 30,
                       color: Colors.blueAccent,
@@ -53,14 +53,14 @@ class _TotalUpState extends State<TotalUp> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Jumlah stock",
+                    "Daftar Minuman",
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.black54,
                     ),
                   ),
                   Text(
-                    b.toString(),
+                    val.minuman.length.toString(),
                     style: TextStyle(
                       fontSize: 30,
                       color: Colors.green,

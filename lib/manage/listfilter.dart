@@ -1,6 +1,5 @@
 List filters = [
+  'All',
   'Makanan',
   'Minuman',
-  'stock banyak',
-  'stock sedikit',
 ];

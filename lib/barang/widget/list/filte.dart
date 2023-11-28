@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
+import '../../../controller/barangcontroller.dart';
 import '../../../manage/listfilter.dart';
 
 class Filte extends StatefulWidget {
@@ -11,13 +12,14 @@ class Filte extends StatefulWidget {
 }
 
 class _FilteState extends State<Filte> {
+  Getbarang b = Get.put(Getbarang());
   @override
   Widget build(BuildContext context) {
     return BackdropFilter(
       filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
       child: Container(
         padding: EdgeInsets.all(15),
-        height: 150,
+        height: 120,
         margin: EdgeInsets.all(15),
         decoration: BoxDecoration(
           // border: Border.all(
@@ -30,7 +32,7 @@ class _FilteState extends State<Filte> {
         child: Column(
           children: [
             Text(
-              "Filter barang",
+              "Filter Menu",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
               ),
@@ -45,21 +47,23 @@ class _FilteState extends State<Filte> {
                   md: 4,
                   sm: 4,
                   child: InkWell(
-                    onTap: () {
-                      Get.back();
+                      onTap: () {
+                        print(a);
+                        b.filter.value = a;
+                        Get.back();
+                        b.update();
                     },
                     child: Container(
                       margin: EdgeInsets.all(5),
-                      height: 30,
+                      height: 35,
                       decoration: BoxDecoration(
                         color: Colors.grey.shade300,
                         borderRadius: BorderRadius.circular(5),
                       ),
                       child: Center(
-                        child: Text(
-                          a,
+                        child: Text(a,
                           style: TextStyle(
-                            fontSize: 13,
+                            fontSize: 15,
                           ),
                         ),
                       ),

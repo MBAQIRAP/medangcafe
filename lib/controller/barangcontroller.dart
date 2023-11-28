@@ -1,5 +1,3 @@
-
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,6 +8,14 @@ class Getbarang extends GetxController {
   List temu = [];
   List beli = [];
   List sortgl = [];
+  List makanan = [].obs;
+  List minuman = [].obs;
+
+  var filter= "All".obs;
+
+  late var daftarMakanan = makanan.length.obs;
+
+  late var daftarMinuman = minuman.length.obs;
 
   hapusbeliall() {
     beli.clear();
@@ -29,11 +35,13 @@ class Getbarang extends GetxController {
       required int jumlah,
       required String id,
       required int jumlahbeli,
-      required int tot}) {
+        required String kategori,
+        required int tot,}) {
     beli.add({
       'idb': id,
       'kode': kode,
       'nama': nama,
+      'kategori' : kategori,
       'harga': harga,
       'jumlah': jumlah,
       'jumlahbeli': jumlahbeli,
@@ -64,6 +72,7 @@ class Getbarang extends GetxController {
     });
     update();
   }
+
 
   void cari({required String cari}) async {
     String lowerCaseQuery = cari.trim().toLowerCase();
@@ -116,10 +125,67 @@ class Getbarang extends GetxController {
     return stream;
   }
 
-  addbarang({required String bar, required String nama, required int harga, required int jumlah}) async {
+  Stream<QuerySnapshot> getmakanan() {
+    makanan.clear();
+    Stream<QuerySnapshot> stream = dbbarang
+        .where('kategori', isEqualTo: 'makanan')
+        .orderBy('tgl', descending: true)
+        .snapshots(includeMetadataChanges: true);
+
+    stream.listen((querySnapshot) {
+      makanan.clear();
+      querySnapshot.docs.forEach((res) {
+        makanan.add(
+          {
+            'id': res.id,
+            'data': res.data(),
+          },
+        );
+        update();
+      },
+      );
+      update();
+    },
+    );
+    return stream;
+  }
+
+  Stream<QuerySnapshot> getminuman() {
+    minuman.clear();
+    Stream<QuerySnapshot> stream = dbbarang
+        .where('kategori', isEqualTo: 'minuman')
+        .orderBy('tgl', descending: true)
+        .snapshots(includeMetadataChanges: true);
+
+    stream.listen((querySnapshot) {
+      minuman.clear();
+      querySnapshot.docs.forEach((res) {
+        minuman.add(
+          {
+            'id': res.id,
+            'data': res.data(),
+          },
+        );
+        update();
+      },
+      );
+      update();
+    },
+    );
+    return stream;
+  }
+
+
+  addbarang(
+      {required String bar,
+        required String nama,
+        required int harga,
+        required int jumlah,
+        required String kategori}) async {
     await dbbarang.add({
       'bar': bar,
       'nama': nama,
+      'kategori': kategori,
       'harga': harga,
       'jumlah': jumlah,
       'tgl': DateTime.now(),
@@ -127,10 +193,16 @@ class Getbarang extends GetxController {
     update();
   }
 
-  editbarang({required String id, required String nama, required int harga, required int stock}) async {
+  editbarang(
+      {required String id,
+        required String nama,
+        required int harga,
+        required int stock,
+        required String kategori}) async {
     await dbbarang.doc(id).update({
       'nama': nama,
       'harga': harga,
+      'kategori' : kategori,
       'jumlah': stock,
     });
     update();

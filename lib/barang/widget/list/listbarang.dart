@@ -11,6 +11,7 @@ class ListBarang extends StatefulWidget {
 }
 
 class _ListBarangState extends State<ListBarang> {
+  Getbarang b = Get.put(Getbarang());
   Widget listb() {
     return Padding(
       padding: const EdgeInsets.only(left: 15, right: 15),
@@ -23,6 +24,38 @@ class _ListBarangState extends State<ListBarang> {
               fontWeight: FontWeight.bold,
             ),
           ),
+          Row(
+            children: [
+              Obx(() => Text(
+                '${b.filter.value}',
+                style: TextStyle(
+                  color: Colors.grey,
+                  fontSize: 13,
+                ),
+              )),
+              SizedBox(
+                width: 15,
+              ),
+              InkWell(
+                onTap: () {
+                  Get.bottomSheet(Filte());
+                },
+                child: Container(
+                  width: 30,
+                  height: 30,
+                  decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: Icon(
+                    Icons.filter_alt_outlined,
+                    color: Colors.white,
+                    size: 18,
+                  ),
+                ),
+              ),
+            ],
+          )
         ],
       ),
     );
@@ -39,21 +72,52 @@ class _ListBarangState extends State<ListBarang> {
           SizedBox(
             height: 5,
           ),
-          GetBuilder<Getbarang>(
-            init: Getbarang(),
+          GetBuilder(
+            init: Getbarang() ,
             builder: (val) {
+              if(val.filter.value == "Minuman") {
+                return Column(
+                  children: [
+                    for (var a in val.minuman)
+                      Expa(
+                        kode: a['data']['bar'],
+                        id: a['id'],
+                        nama: a['data']['nama'],
+                        harga: a['data']['harga'],
+                        stock: a['data']['jumlah'],
+                        kategori: a['data']['kategori'],
+                      ),
+                  ],
+                );
+              }else if(val.filter.value == "Makanan"){
               return Column(
                 children: [
-                  for (var a in val.barang)
+                  for (var a in val.makanan)
                     Expa(
                       kode: a['data']['bar'],
                       id: a['id'],
                       nama: a['data']['nama'],
                       harga: a['data']['harga'],
                       stock: a['data']['jumlah'],
+                      kategori: a['data']['kategori'],
                     ),
                 ],
               );
+              }else{
+                return Column(
+                  children: [
+                    for (var a in val.barang)
+                      Expa(
+                        kode: a['data']['bar'],
+                        id: a['id'],
+                        nama: a['data']['nama'],
+                        harga: a['data']['harga'],
+                        stock: a['data']['jumlah'],
+                        kategori: a['data']['kategori'],
+                      ),
+                  ],
+                );
+              }
             },
           )
         ],

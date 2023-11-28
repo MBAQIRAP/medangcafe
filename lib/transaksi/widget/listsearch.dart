@@ -14,6 +14,7 @@ class ListSearch extends StatefulWidget {
   final bool? x;
   final int? i;
   final int? jumbel;
+  final String? kategori;
   ListSearch(
       {this.id,
       this.kode,
@@ -22,7 +23,8 @@ class ListSearch extends StatefulWidget {
       this.stock,
       this.x,
       this.i,
-      this.jumbel});
+      this.jumbel,
+      this.kategori});
   @override
   _ListSearchState createState() => _ListSearchState();
 }
@@ -65,6 +67,7 @@ class _ListSearchState extends State<ListSearch> {
                     jumlah: widget.stock!,
                     jumlahbeli: int.parse(jumbel.text),
                     tot: widget.harga! * int.parse(jumbel.text),
+                    kategori: widget.kategori!,
                   );
                 },
                 child: Icon(Icons.send, color: Colors.black)),
@@ -95,7 +98,7 @@ class _ListSearchState extends State<ListSearch> {
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(100),
-                child: Icon(Icons.folder_open, color: Colors.black),
+                child: Icon(Icons.restaurant_menu, color: Colors.black),
               ),
             ),
             SizedBox(
