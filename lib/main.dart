@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:medang_caffe/firebase_options.dart';
 import 'package:medang_caffe/transaksi/transaksi.dart';
 import 'package:permission_handler/permission_handler.dart';

@@ -1,7 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:qrscan/qrscan.dart' as scanner;
 
 import '../../controller/barangcontroller.dart';
 import 'listsearch.dart';
@@ -15,17 +14,6 @@ class _SearchState extends State<Search> {
   Getbarang b = Get.put(Getbarang());
   TextEditingController barang = TextEditingController();
   late String barcode;
-  _scan() async {
-    barcode = (await scanner.scan())!;
-    // Check if the widget is still mounted before updating the state.
-    if (mounted) {
-      setState(() {
-        barang.text = barcode;
-        b.cari(cari: barcode);
-      });
-    }
-    print(barcode);
-  }
 
   Widget sc() {
     return Container(
@@ -47,9 +35,6 @@ class _SearchState extends State<Search> {
         ),
         controller: barang,
         decoration: InputDecoration(
-          suffixIcon: InkWell(
-              onTap: _scan,
-              child: Icon(Icons.qr_code_outlined, color: Colors.black)),
           hintText: "Cari barang",
           border: InputBorder.none,
         ),

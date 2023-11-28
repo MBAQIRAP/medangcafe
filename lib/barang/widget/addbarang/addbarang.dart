@@ -1,7 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:qrscan/qrscan.dart' as scanner;
 
 import '../../../controller/barangcontroller.dart';
 
@@ -18,15 +17,6 @@ class _AddBaranGState extends State<AddBaranG> {
   String? kategori;
   late String barcode;
   Getbarang b = Get.put(Getbarang());
-
-  _scan() async {
-    barcode = (await scanner.scan())!;
-    setState(() {
-      kodebar.text = barcode;
-    });
-
-    print(barcode);
-  }
 
   Widget sc({required String hint, required TextEditingController c, required TextInputType tp}) {
     return Container(
@@ -47,12 +37,6 @@ class _AddBaranGState extends State<AddBaranG> {
         ),
         controller: c,
         decoration: InputDecoration(
-          suffixIcon: hint == "Kode"
-              ? InkWell(
-                  onTap: _scan,
-                  child: Icon(Icons.qr_code_rounded),
-                )
-              : null,
           hintText: hint,
           border: InputBorder.none,
         ),
