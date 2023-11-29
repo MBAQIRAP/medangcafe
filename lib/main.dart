@@ -14,7 +14,6 @@ import 'laporan/laporan.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Permission.camera.request();
   await Permission.storage.request();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await initializeDateFormatting('id_ID').then((_) => runApp(MyApp()));

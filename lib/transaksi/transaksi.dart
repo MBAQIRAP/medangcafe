@@ -57,7 +57,7 @@ class _TransaksiState extends State<Transaksi> {
                     height: Get.height / 1.5,
                     child: Center(
                       child:
-                          Lottie.asset('assets/can.json', width: Get.width / 2),
+                          Lottie.asset('assets/kopi.json', width: Get.width / 2),
                     ),
                   )
                 : Column(
