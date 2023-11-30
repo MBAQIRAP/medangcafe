@@ -112,7 +112,7 @@ class _LaporanState extends State<Laporan> {
               child: GetBuilder<TransaksiController>(
                 init: TransaksiController(),
                 builder: (transaksiController) {
-                  reverse = List.from(t.transaksichart.reversed);
+                  reverse = List.from(t.transaksichart);
                   int b = 0;
                   transaksiController.transaksi.forEach((item) {
                     b += int.parse(item['data']['bayar'].toString());

@@ -143,7 +143,6 @@ class TransaksiController extends GetxController {
       });
       update();
     });
-
     // Assuming you have an update function to refresh the UI
     update();
 
