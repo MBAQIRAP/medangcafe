@@ -4,29 +4,27 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
-import '../../../controller/barangcontroller.dart';
+import '../../../controller/menucontroller.dart';
 import '../../../manage/formater.dart';
 
 class Expa extends StatefulWidget {
   final String? id;
-  final String? kode;
   final String? nama;
   final int? harga;
   final int? stock;
   String? kategori;
-  Expa({this.id, this.kode, this.nama, this.harga, this.stock, this.kategori});
+  Expa({this.id, this.nama, this.harga, this.stock, this.kategori});
   @override
   _ExpaState createState() => _ExpaState();
 }
 
 class _ExpaState extends State<Expa> {
-  TextEditingController kode = TextEditingController();
   TextEditingController nama = TextEditingController();
   TextEditingController harga = TextEditingController();
   TextEditingController stock = TextEditingController();
   String? kategori;
   bool ex = false;
-  Getbarang b = Get.put(Getbarang());
+  Getmenu b = Get.put(Getmenu());
   @override
   void initState() {
     super.initState();
@@ -44,7 +42,7 @@ class _ExpaState extends State<Expa> {
           icon: Icons.delete_outline_rounded,
           foregroundColor: Colors.black,
           onTap: () {
-            b.deletbarang(id: widget.id!, nama: widget.nama!);
+            b.deletmenu(id: widget.id!, nama: widget.nama!);
           },
         ),
       ],
@@ -55,7 +53,7 @@ class _ExpaState extends State<Expa> {
           icon: Icons.delete_outline_rounded,
           foregroundColor: Colors.black,
           onTap: () {
-            b.deletbarang(id: widget.id!, nama: widget.nama!);
+            b.deletmenu(id: widget.id!, nama: widget.nama!);
           },
         ),
       ],
@@ -131,44 +129,6 @@ class _ExpaState extends State<Expa> {
             child: Icon(Icons.chevron_right_rounded),
           ),
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 15, right: 15),
-                  child: Text(
-                    "Kode",
-                    style: TextStyle(
-                      fontSize: 13,
-                      color: Colors.grey,
-                    ),
-                  ),
-                ),
-                Container(
-                  height: 40,
-                  margin: EdgeInsets.only(left: 15, right: 15),
-                  padding: EdgeInsets.only(left: 15, right: 15, bottom: 1),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.grey.shade200,
-                  ),
-                  child: TextField(
-                    onChanged: (value) {
-                      setState(() {});
-                    },
-                    cursorColor: Colors.black,
-                    style: TextStyle(
-                      fontSize: 13,
-                    ),
-                    controller: kode,
-                    decoration: InputDecoration(
-                      hintText: "Kode",
-                      border: InputBorder.none,
-                    ),
-                  ),
-                ),
-              ],
-            ),
             SizedBox(
               height: 15,
             ),
@@ -340,7 +300,7 @@ class _ExpaState extends State<Expa> {
               alignment: Alignment.centerLeft,
               child: InkWell(
                 onTap: () {
-                  b.editbarang(
+                  b.editmenu(
                     id: widget.id!,
                     nama: nama.text,
                     kategori: kategori!,
@@ -384,9 +344,6 @@ class _ExpaState extends State<Expa> {
           onExpansionChanged: (value) {
             setState(() {
               if (value == false) {
-                kode.text.length <= 0
-                    ? kode.text = widget.kode!
-                    : kode.text = kode.text;
                 nama.text.length <= 0
                     ? nama.text = widget.nama!
                     : nama.text = nama.text;
@@ -401,7 +358,6 @@ class _ExpaState extends State<Expa> {
                     : kategori = kategori;
               }
               if (value == true) {
-                kode.text = widget.kode!;
                 nama.text = widget.nama!;
                 harga.text = widget.harga.toString();
                 stock.text = widget.stock.toString();

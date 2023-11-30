@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
-import '../../../controller/barangcontroller.dart';
+import '../../../controller/menucontroller.dart';
 import '../../../manage/listfilter.dart';
 
 class Filte extends StatefulWidget {
@@ -12,7 +12,7 @@ class Filte extends StatefulWidget {
 }
 
 class _FilteState extends State<Filte> {
-  Getbarang b = Get.put(Getbarang());
+  Getmenu b = Get.put(Getmenu());
   @override
   Widget build(BuildContext context) {
     return BackdropFilter(

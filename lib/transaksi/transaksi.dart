@@ -5,7 +5,7 @@ import 'package:medang_caffe/transaksi/widget/listsearch.dart';
 import 'package:medang_caffe/transaksi/widget/search.dart';
 import 'package:medang_caffe/transaksi/history.dart';
 
-import '../controller/barangcontroller.dart';
+import '../controller/menucontroller.dart';
 import '../controller/transaksicontroller.dart';
 import '../manage/formater.dart';
 
@@ -16,7 +16,7 @@ class Transaksi extends StatefulWidget {
 
 class _TransaksiState extends State<Transaksi> {
   TransaksiController t = Get.put(TransaksiController());
-  Getbarang b = Get.put(Getbarang());
+  Getmenu b = Get.put(Getmenu());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,8 +46,8 @@ class _TransaksiState extends State<Transaksi> {
           ),
         ],
       ),
-      body: GetBuilder<Getbarang>(
-        init: Getbarang(),
+      body: GetBuilder<Getmenu>(
+        init: Getmenu(),
         builder: (val) {
           final a = val.beli;
           return SingleChildScrollView(
@@ -82,8 +82,8 @@ class _TransaksiState extends State<Transaksi> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Flexible(
-          child : GetBuilder<Getbarang>(
-            init: Getbarang(),
+          child : GetBuilder<Getmenu>(
+            init: Getmenu(),
             builder: (val) {
               int b = 0;
               val.beli.forEach((item) {

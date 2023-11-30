@@ -7,8 +7,8 @@ import 'package:medang_caffe/firebase_options.dart';
 import 'package:medang_caffe/transaksi/transaksi.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-import 'barang/barang.dart';
-import 'controller/barangcontroller.dart';
+import 'menu/menu.dart';
+import 'controller/menucontroller.dart';
 import 'controller/transaksicontroller.dart';
 import 'laporan/laporan.dart';
 
@@ -56,11 +56,11 @@ class Wrap extends StatefulWidget {
 class _WrapState extends State<Wrap> {
   int hlm = 0;
   PageController p = PageController(initialPage: 0, keepPage: true);
-  Getbarang b = Get.put(Getbarang());
+  Getmenu b = Get.put(Getmenu());
   TransaksiController t = Get.put(TransaksiController());
   @override
   void initState() {
-    b.getbarang();
+    b.getmenu();
     t.gettransaksi();
     b.getmakanan();
     b.getminuman();
@@ -78,7 +78,7 @@ class _WrapState extends State<Wrap> {
         controller: p,
         children: [
           Transaksi(),
-          Barang(),
+          Menu(),
           Laporan(),
         ],
         onPageChanged: (value) {

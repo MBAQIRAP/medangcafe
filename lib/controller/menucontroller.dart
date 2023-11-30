@@ -2,9 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class Getbarang extends GetxController {
-  CollectionReference dbbarang = FirebaseFirestore.instance.collection('barang');
-  List barang = [];
+class Getmenu extends GetxController {
+  CollectionReference dbmenu = FirebaseFirestore.instance.collection('menu');
+  List menu = [];
   List temu = [];
   List beli = [];
   List sortgl = [];
@@ -29,17 +29,15 @@ class Getbarang extends GetxController {
   }
 
   addbeli(
-      {required String kode,
+      {required String id,
       required String nama,
       required int harga,
       required int jumlah,
-      required String id,
       required int jumlahbeli,
         required String kategori,
         required int tot,}) {
     beli.add({
-      'idb': id,
-      'kode': kode,
+      'id': id,
       'nama': nama,
       'kategori' : kategori,
       'harga': harga,
@@ -54,15 +52,15 @@ class Getbarang extends GetxController {
 
   stockEdit() async {
     beli.forEach((map) async {
-      dbbarang.where("nama",isEqualTo: map['nama'].toString()).get().then(
+      dbmenu.where("nama",isEqualTo: map['nama'].toString()).get().then(
               (querySnapshot) {
                 querySnapshot.docs.forEach((element) {
                   Map<String,dynamic> data = element.data() as Map<String, dynamic>;
                   String idDoc = element.id;
                   int jmllama=int.parse(data['jumlah'].toString());
-                  int jmlBarang = int.parse(map['jumlahbeli'].toString());
-                  int jmlUpdate = jmllama - jmlBarang;
-                  dbbarang.doc(idDoc).update({
+                  int jmlMenu = int.parse(map['jumlahbeli'].toString());
+                  int jmlUpdate = jmllama - jmlMenu;
+                  dbmenu.doc(idDoc).update({
                     'jumlah' : jmlUpdate
                   });
                 });
@@ -76,7 +74,7 @@ class Getbarang extends GetxController {
 
   void cari({required String cari}) async {
     String lowerCaseQuery = cari.trim().toLowerCase();
-    var filteredList = barang
+    var filteredList = menu
         .where((element) =>
         element['data']['nama']
             .toString()
@@ -101,16 +99,16 @@ class Getbarang extends GetxController {
     update();
   }
 
-  Stream<QuerySnapshot> getbarang() {
-    barang.clear();
-    Stream<QuerySnapshot> stream = dbbarang
+  Stream<QuerySnapshot> getmenu() {
+    menu.clear();
+    Stream<QuerySnapshot> stream = dbmenu
         .orderBy('tgl', descending: true)
         .snapshots(includeMetadataChanges: true);
 
     stream.listen((querySnapshot) {
-        barang.clear();
+        menu.clear();
         querySnapshot.docs.forEach((res) {
-            barang.add(
+            menu.add(
               {
                 'id': res.id,
                 'data': res.data(),
@@ -127,7 +125,7 @@ class Getbarang extends GetxController {
 
   Stream<QuerySnapshot> getmakanan() {
     makanan.clear();
-    Stream<QuerySnapshot> stream = dbbarang
+    Stream<QuerySnapshot> stream = dbmenu
         .where('kategori', isEqualTo: 'makanan')
         .orderBy('tgl', descending: true)
         .snapshots(includeMetadataChanges: true);
@@ -152,7 +150,7 @@ class Getbarang extends GetxController {
 
   Stream<QuerySnapshot> getminuman() {
     minuman.clear();
-    Stream<QuerySnapshot> stream = dbbarang
+    Stream<QuerySnapshot> stream = dbmenu
         .where('kategori', isEqualTo: 'minuman')
         .orderBy('tgl', descending: true)
         .snapshots(includeMetadataChanges: true);
@@ -176,14 +174,13 @@ class Getbarang extends GetxController {
   }
 
 
-  addbarang(
-      {required String bar,
+  addmenu(
+      {
         required String nama,
         required int harga,
         required int jumlah,
         required String kategori}) async {
-    await dbbarang.add({
-      'bar': bar,
+    await dbmenu.add({
       'nama': nama,
       'kategori': kategori,
       'harga': harga,
@@ -193,13 +190,13 @@ class Getbarang extends GetxController {
     update();
   }
 
-  editbarang(
+  editmenu(
       {required String id,
         required String nama,
         required int harga,
         required int stock,
         required String kategori}) async {
-    await dbbarang.doc(id).update({
+    await dbmenu.doc(id).update({
       'nama': nama,
       'harga': harga,
       'kategori' : kategori,
@@ -208,8 +205,8 @@ class Getbarang extends GetxController {
     update();
   }
 
-  deletbarang({required String id, required String nama}) async {
-    await dbbarang.doc(id).delete();
+  deletmenu({required String id, required String nama}) async {
+    await dbmenu.doc(id).delete();
     Get.rawSnackbar(
       margin: EdgeInsets.all(15),
       borderRadius: 15,

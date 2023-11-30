@@ -2,12 +2,11 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../controller/barangcontroller.dart';
+import '../../controller/menucontroller.dart';
 import '../../manage/formater.dart';
 
 class ListSearch extends StatefulWidget {
   final String? id;
-  final String? kode;
   final String? nama;
   final int? harga;
   final int? stock;
@@ -17,7 +16,6 @@ class ListSearch extends StatefulWidget {
   final String? kategori;
   ListSearch(
       {this.id,
-      this.kode,
       this.nama,
       this.harga,
       this.stock,
@@ -30,7 +28,7 @@ class ListSearch extends StatefulWidget {
 }
 
 class _ListSearchState extends State<ListSearch> {
-  final Getbarang b = Get.put(Getbarang());
+  final Getmenu b = Get.put(Getmenu());
   TextEditingController jumbel = TextEditingController();
 
   Widget by() {
@@ -61,7 +59,6 @@ class _ListSearchState extends State<ListSearch> {
                   if (Get.isBottomSheetOpen!) Get.back();
                   b.addbeli(
                     id: widget.id!,
-                    kode: widget.kode!,
                     nama: widget.nama!,
                     kategori: widget.kategori!,
                     harga: widget.harga!,
@@ -71,7 +68,7 @@ class _ListSearchState extends State<ListSearch> {
                   );
                 },
                 child: Icon(Icons.send, color: Colors.black)),
-            hintText: "Jumlah barang",
+            hintText: "Jumlah Menu",
             border: InputBorder.none,
           ),
         ),

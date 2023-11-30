@@ -4,23 +4,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:get/get.dart';
 
-import 'package:medang_caffe/barang/widget/addbarang/addbarang.dart';
-import 'package:medang_caffe/barang/widget/list/listbarang.dart';
-import 'package:medang_caffe/barang/widget/totalup.dart';
-import 'package:medang_caffe/barang/widget/search.dart';
+import 'package:medang_caffe/menu/widget/addmenu/addmenu.dart';
+import 'package:medang_caffe/menu/widget/list/listmenu.dart';
+import 'package:medang_caffe/menu/widget/totalup.dart';
+import 'package:medang_caffe/menu/widget/search.dart';
 
-import '../controller/barangcontroller.dart';
+import '../controller/menucontroller.dart';
 // import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
-class Barang extends StatefulWidget {
+class Menu extends StatefulWidget {
   @override
-  _BarangState createState() => _BarangState();
+  _MenuState createState() => _MenuState();
 }
 
-class _BarangState extends State<Barang> {
+class _MenuState extends State<Menu> {
   late StreamSubscription<bool> keyboardSubscription;
   bool flo = false;
-  Getbarang b = Get.put(Getbarang());
+  Getmenu b = Get.put(Getmenu());
   @override
   void initState() {
     super.initState();
@@ -94,7 +94,7 @@ class _BarangState extends State<Barang> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TotalUp(),
-              ListBarang(),
+              ListMenu(),
             ],
           ),
         ),
@@ -105,7 +105,7 @@ class _BarangState extends State<Barang> {
                 foregroundColor: Colors.white,
                 onPressed: () {
                   Get.bottomSheet(
-                    AddBaranG(),
+                    AddMenu(),
                     isScrollControlled: true,
                   );
                 },

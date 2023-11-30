@@ -2,7 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../controller/barangcontroller.dart';
+import '../../controller/menucontroller.dart';
 import 'listsearch.dart';
 
 class Search extends StatefulWidget {
@@ -11,9 +11,8 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
-  Getbarang b = Get.put(Getbarang());
-  TextEditingController barang = TextEditingController();
-  late String barcode;
+  Getmenu b = Get.put(Getmenu());
+  TextEditingController menu = TextEditingController();
 
   Widget sc() {
     return Container(
@@ -33,9 +32,9 @@ class _SearchState extends State<Search> {
         style: TextStyle(
           fontSize: 13,
         ),
-        controller: barang,
+        controller: menu,
         decoration: InputDecoration(
-          hintText: "Cari barang",
+          hintText: "Cari Menu",
           border: InputBorder.none,
         ),
       ),
@@ -71,13 +70,13 @@ class _SearchState extends State<Search> {
               physics: BouncingScrollPhysics(),
               child: Column(
                 children: [
-                  GetBuilder<Getbarang>(
-                    init: Getbarang(),
+                  GetBuilder<Getmenu>(
+                    init: Getmenu(),
                     builder: (val) {
                       if(val.temu.isEmpty){
                         return Column(
                           children: [
-                            for (var a in val.barang)
+                            for (var a in val.menu)
                               ListSearch(
                                 kode: a['data']['bar'],
                                 id: a['id'],

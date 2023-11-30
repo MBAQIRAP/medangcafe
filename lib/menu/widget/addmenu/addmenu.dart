@@ -2,21 +2,20 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../controller/barangcontroller.dart';
+import '../../../controller/menucontroller.dart';
 
-class AddBaranG extends StatefulWidget {
+class AddMenu extends StatefulWidget {
   @override
-  _AddBaranGState createState() => _AddBaranGState();
+  _AddMenuState createState() => _AddMenuState();
 }
 
-class _AddBaranGState extends State<AddBaranG> {
-  TextEditingController kodebar = TextEditingController();
+class _AddMenuState extends State<AddMenu> {
   TextEditingController nama = TextEditingController();
   TextEditingController harga = TextEditingController();
   TextEditingController jumlah = TextEditingController();
   String? kategori;
   late String barcode;
-  Getbarang b = Get.put(Getbarang());
+  Getmenu b = Get.put(Getmenu());
 
   Widget sc({required String hint, required TextEditingController c, required TextInputType tp}) {
     return Container(
@@ -59,25 +58,21 @@ class _AddBaranGState extends State<AddBaranG> {
         child: Column(
           children: [
             Text(
-              "Tambah barang",
+              "Tambah Menu",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
               ),
             ),
             SizedBox(
-              height: 15,
+              height: 30,
             ),
-            sc(hint: "Kode", c: kodebar, tp: TextInputType.text),
+            sc(hint: "Nama menu", c: nama, tp: TextInputType.text),
             SizedBox(
-              height: 10,
-            ),
-            sc(hint: "Nama barang", c: nama, tp: TextInputType.text),
-            SizedBox(
-              height: 10,
+              height: 20,
             ),
             sc(hint: "Harga satuan", c: harga, tp: TextInputType.number),
             SizedBox(
-              height: 10,
+              height: 20,
             ),
             sc(hint: "Jumlah", c: jumlah, tp: TextInputType.number),
             Container(
@@ -131,8 +126,7 @@ class _AddBaranGState extends State<AddBaranG> {
                     backgroundColor: Colors.black,
                     foregroundColor: Colors.white,
                     onPressed: () {
-                      b.addbarang(
-                        bar: kodebar.text,
+                      b.addmenu(
                         nama: nama.text,
                         kategori: kategori!,
                         harga: int.parse(harga.text),

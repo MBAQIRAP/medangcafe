@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../controller/barangcontroller.dart';
+import '../../controller/menucontroller.dart';
 
 class TotalUp extends StatefulWidget {
   @override
@@ -13,11 +13,11 @@ class TotalUp extends StatefulWidget {
 class _TotalUpState extends State<TotalUp> {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<Getbarang>(
-      init: Getbarang(),
+    return GetBuilder<Getmenu>(
+      init: Getmenu(),
       builder: (val) {
         int b = 0;
-        val.barang.forEach((item) {
+        val.menu.forEach((item) {
           b += int.parse(item['data']['jumlah'].toString());
         });
         return Row(

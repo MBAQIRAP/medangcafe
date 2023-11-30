@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:intl/intl.dart';
 
-import '../controller/barangcontroller.dart';
+import '../controller/menucontroller.dart';
 import '../controller/transaksicontroller.dart';
 import '../manage/formater.dart';
 
@@ -16,7 +16,7 @@ class Laporan extends StatefulWidget {
 }
 
 class _LaporanState extends State<Laporan> {
-  Getbarang b = Get.put(Getbarang());
+  Getmenu b = Get.put(Getmenu());
   List<Color> randomColors = [];
   List reverse=[];
   TransaksiController t = Get.put(TransaksiController());
@@ -118,10 +118,10 @@ class _LaporanState extends State<Laporan> {
                     b += int.parse(item['data']['bayar'].toString());
                   });
                   return GetBuilder(
-                    init: Getbarang(),
-                    builder: (barangController) {
+                    init: Getmenu(),
+                    builder: (menuController) {
                       int count = 0;
-                      barangController.barang.forEach((item) {
+                      menuController.menu.forEach((item) {
                         count += int.parse(item['data']['jumlah'].toString());
                       });
                       return Column(
@@ -180,7 +180,7 @@ class _LaporanState extends State<Laporan> {
                                           ),
                                         ),
                                         Text(
-                                          barangController.barang.length
+                                          menuController.menu.length
                                               .toString(),
                                           textAlign: TextAlign.left,
                                           style: TextStyle(

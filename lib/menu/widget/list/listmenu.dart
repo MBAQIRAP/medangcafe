@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../controller/barangcontroller.dart';
+import '../../../controller/menucontroller.dart';
 import 'contentlist.dart';
 import 'filte.dart';
 
-class ListBarang extends StatefulWidget {
+class ListMenu extends StatefulWidget {
   @override
-  _ListBarangState createState() => _ListBarangState();
+  _ListMenuState createState() => _ListMenuState();
 }
 
-class _ListBarangState extends State<ListBarang> {
-  Getbarang b = Get.put(Getbarang());
+class _ListMenuState extends State<ListMenu> {
+  Getmenu b = Get.put(Getmenu());
   Widget listb() {
     return Padding(
       padding: const EdgeInsets.only(left: 15, right: 15),
@@ -19,7 +19,7 @@ class _ListBarangState extends State<ListBarang> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            "List barang",
+            "List Menu",
             style: TextStyle(
               fontWeight: FontWeight.bold,
             ),
@@ -73,14 +73,13 @@ class _ListBarangState extends State<ListBarang> {
             height: 5,
           ),
           GetBuilder(
-            init: Getbarang() ,
+            init: Getmenu() ,
             builder: (val) {
               if(val.filter.value == "Minuman") {
                 return Column(
                   children: [
                     for (var a in val.minuman)
                       Expa(
-                        kode: a['data']['bar'],
                         id: a['id'],
                         nama: a['data']['nama'],
                         harga: a['data']['harga'],
@@ -94,7 +93,6 @@ class _ListBarangState extends State<ListBarang> {
                 children: [
                   for (var a in val.makanan)
                     Expa(
-                      kode: a['data']['bar'],
                       id: a['id'],
                       nama: a['data']['nama'],
                       harga: a['data']['harga'],
@@ -106,9 +104,8 @@ class _ListBarangState extends State<ListBarang> {
               }else{
                 return Column(
                   children: [
-                    for (var a in val.barang)
+                    for (var a in val.menu)
                       Expa(
-                        kode: a['data']['bar'],
                         id: a['id'],
                         nama: a['data']['nama'],
                         harga: a['data']['harga'],
