@@ -38,7 +38,6 @@ dependencies:
   intl: ^0.18.1
   flutter_keyboard_visibility: ^5.4.1
   fl_chart: ^0.64.0
-  qrscan: ^0.3.3
   permission_handler: ^11.0.1
   cloud_firestore: ^4.13.0
   firebase_storage: ^11.5.0
